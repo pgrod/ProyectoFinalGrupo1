@@ -5,30 +5,93 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ProyectoFinalGrupo1.ViewModel
 {
-    public class TareaViewModel
+    public class TareaViewModel:BindableObject
     {
-        private readonly List<Tarea> tareas = new List<Tarea>();
+        private ObservableCollection<Tarea> tarea;
 
-        public void EditarTarea(Tarea tareas)
+        public ObservableCollection<Tarea> Tarea
         {
-            var tareaCreada = tareas.Find(t => t.Id == tareas.Id);
-            if (tareaCreada != null)
+            get => tarea;
+            set
             {
-                tareaCreada.Tarea = tareas.Tarea;
-                tareaCreada.Descripcion = tareas.Descripcion;
-                tareaCreada.Estado = tareas.Estado;
+                tarea = value;
+                OnPropertyChanged();
             }
         }
 
-        public void RemoveTarea(int Id)
+        private string NuevaTarea;
+
+        public string Nuevatarea
         {
-            var tareas = tareas.Find(tareas=> tareas.Id == Id);
-            if (tareas != null)
+            get => NuevaTarea;
+            set
             {
-                tareas.Remove(tareas);
+                NuevaTarea = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand AgregarTareaCommand { get; }
+        public ICommand RemoveTareaCommand { get; }
+        public ICommand EditarEstadoCommand { get; }
+
+        public TareaViewModel()
+        {
+            Tarea = new ObservableCollection<Tarea>();
+
+            AgregarTareaCommand = new Command(AgregarTarea);
+            RemoveTareaCommand = new Command<Tarea>(RemoveTarea);
+            EditarEstadoCommand = new Command<Tarea>(EditarEstado);
+        }
+
+        private void AgregarTarea()
+        {
+            if (!string.IsNullOrEmpty(NuevaTarea))
+            {
+                Tarea.Add(new Models.Tarea(Nuevatarea));
+                NuevaTarea = string.Empty;
+                OnPropertyChanged(nameof(Nuevatarea));
+            }
+        }
+
+        private void RemoveTarea(Tarea tarea)
+        {
+            Tarea.Remove(tarea);
+        }
+
+        private string estado;
+        public string Estado
+        {
+            get => estado;
+            set
+            {
+                estado = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Nombre { get; set; }
+
+        public TareaViewModel(string nombre)
+        {
+            Nombre = nombre;
+            Estado = "Por hacer";
+        }
+
+        private void EditarEstado(Tarea tarea)
+        {
+            if (tarea != null)
+            {
+                if (tarea.Estado == "Por hacer")
+                    tarea.Estado = "En progreso";
+                else if (tarea.Estado == "En progreso")
+                    tarea.Estado = "Finalizada";
+                else
+                    tarea.Estado = "Por hacer";
             }
         }
     }
