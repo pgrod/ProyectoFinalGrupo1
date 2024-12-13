@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace ProyectoFinalGrupo1.ViewModel
 {
-    public class TareasViewModel
+    public class TareaViewModel
     {
-        private readonly List<Tareas> tareas = new List<Tareas>();
+        private readonly List<Tarea> tareas = new List<Tarea>();
 
-        public void EditarTarea(Tareas tareas)
+        public void EditarTarea(Tarea tareas)
         {
             var tareaCreada = tareas.Find(t => t.Id == tareas.Id);
             if (tareaCreada != null)
