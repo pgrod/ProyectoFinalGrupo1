@@ -1,9 +1,9 @@
-﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<?xml version = "1.0" encoding = "UTF-8" ?>
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:ProyectoFinalGrupo1"
-             xmlns:views="clr-namespace:ProyectoFinalGrupo1.Views"
-             x:Class="ProyectoFinalGrupo1.App">
+             xmlns:local="clr-namespace:Proyecto2"
+             xmlns:views="clr-namespace:Proyecto2.Views"
+             x:Class="Proyecto2.App">
     <Application.MainPage>
         <NavigationPage>
             <x:Arguments>
