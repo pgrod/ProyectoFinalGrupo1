@@ -2,13 +2,13 @@
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ProyectoFinalGrupo1"
+             xmlns:views="clr-namespace:ProyectoFinalGrupo1.Views"
              x:Class="ProyectoFinalGrupo1.App">
-    <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Application.Resources>
+    <Application.MainPage>
+        <NavigationPage>
+            <x:Arguments>
+                <views:Tarea/>
+            </x:Arguments>
+        </NavigationPage>
+    </Application.MainPage>
 </Application>
